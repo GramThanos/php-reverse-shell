@@ -1,4 +1,4 @@
-# php-reverse-shell
+# php-smart-reverse-shell
 
 Attacker PC wait for terminal
 ```shell
