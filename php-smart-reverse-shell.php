@@ -65,8 +65,8 @@ if (isset($_REQUEST['ip'])) $ip = $_REQUEST['ip'];
 if (isset($_REQUEST['port'])) $port = $_REQUEST['port'];
 // Get IP and Port from CMD arguments
 if (isset($argv)) {
-	if (isset($argv[1]) $ip = $argv[1];
-	if (isset($argv[2]) $port = $argv[2];
+	if (isset($argv[1])) $ip = $argv[1];
+	if (isset($argv[2])) $port = $argv[2];
 }
 
 //
