@@ -1,6 +1,7 @@
 <?php
-// php-reverse-shell - A Reverse Shell implementation in PHP
+// php-(smart)-reverse-shell - A (Smart) Reverse Shell implementation in PHP
 // Copyright (C) 2007 pentestmonkey@pentestmonkey.net
+// Improvements by Gramthanos
 //
 // This tool may be used for legal purposes only.  Users take full responsibility
 // for any actions performed using this tool.  The author accepts no liability
