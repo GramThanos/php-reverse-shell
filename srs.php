@@ -215,9 +215,10 @@ proc_close($process);
 // Like print, but does nothing if we've daemonised ourself
 // (I can't figure out how to redirect STDOUT like a proper daemon)
 function printit ($string) {
-	if ($verbose && (!isset($daemon) || !$daemon)) {
+	if ((!isset($verbose) || $verbose) && (!isset($daemon) || !$daemon)) {
 		print("$string\n");
 	}
 }
 
 ?>
+
