@@ -1,7 +1,15 @@
 # PHP Smart Reverse Shell scripts
 A smarter shell script
+
+## Get script
+Grap the latest release
 ```shell
-wget -O srs.php https://raw.githubusercontent.com/GramThanos/php-smart-reverse-shell/master/srs.php
+wget -O srs.php https://github.com/GramThanos/php-smart-reverse-shell/releases/download/v2.0-smart/srs.php
+```
+
+Get the packed version to avoid detection (packed using [Split&Encrypt](https://github.com/GramThanos/PHP-Split-Encrypt))
+```shell
+wget -O srs.php https://github.com/GramThanos/php-smart-reverse-shell/releases/download/v2.0-smart/srs.packed.php
 ```
 
 ## Script Commands
